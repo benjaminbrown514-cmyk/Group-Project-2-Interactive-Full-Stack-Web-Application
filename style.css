@@ -1,7 +1,11 @@
-h1 {
-    color: white;
-    background-color: blue; 
-    text-align: center;
-    border: 1px solid blue;
-    
-}   
+h1{
+    color:white;
+    background-color: red;
+    text-align: left;
+    border: 1px solid rgb(49, 48, 48);
+
+}
+
+body {
+    background-color: grey;
+}
