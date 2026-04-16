@@ -39,7 +39,29 @@ function initializeSearch() {
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             const val = searchInput.value.trim();
+            
             if (val) searchCompany(val);
         }
     });
 }
+
+function performSearch() {
+    const term = document.getElementById('search-input').value.toLowerCase().trim();
+    
+    if (!term) {
+        renderCompanies(allCompanies);
+        return;
+    }
+
+    const filtered = allCompanies.filter(c =>
+        c.name.toLowerCase().includes(term) ||
+        c.location.toLowerCase().includes(term) ||
+        c.description.toLowerCase().includes(term)
+    );
+
+    renderCompanies(filtered);
+}
+
+window.onload = () => {
+    fetchCompanies();
+};
