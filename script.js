@@ -5,56 +5,52 @@ async function fetchCompanies() {
         const res = await fetch('/api/companies');
         allCompanies = await res.json();
         renderCompanies(allCompanies);
-    } catch (err) {
-        console.error('Error fetching companies:', err);
+    } catch (e) {
+        console.error("Failed to load companies", e);
     }
 }
 
 function renderCompanies(companies) {
     const grid = document.getElementById('companies-grid');
     const empty = document.getElementById('empty-state');
-    
     grid.innerHTML = '';
 
     if (companies.length === 0) {
         empty.classList.remove('hidden');
         return;
     }
-
     empty.classList.add('hidden');
 
     companies.forEach(company => {
-        const card = document.createElement('div');
-        card.className = 'card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer';
-        card.innerHTML = `
+        const div = document.createElement('div');
+        div.className = 'card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer';
+        div.innerHTML = `
             <div class="flex justify-between items-start">
-                <h3 class="text-xl font-semibold">${company.name}</h3>
-                <span class="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-3xl">${company.location}</span>
+                <h3 class="font-semibold text-xl">${company.name}</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">${company.location}</span>
             </div>
-            <p class="mt-4 text-slate-600 text-sm line-clamp-3">${company.description}</p>
-            <div class="mt-6 text-sky-600 text-sm font-medium flex items-center">
-                View Details 
-                <span class="ml-auto text-xl">→</span>
-            </div>
+            <p class="mt-4 text-slate-600 line-clamp-3">${company.description}</p>
+            <div class="mt-6 text-sky-600 text-sm font-medium">View Details →</div>
         `;
-        card.onclick = () => showCompanyDetail(company);
-        grid.appendChild(card);
+        div.onclick = () => showCompanyDetail(company);
+        grid.appendChild(div);
     });
 }
 
 function showCompanyDetail(company) {
     document.getElementById('modal-name').textContent = company.name;
     document.getElementById('modal-location').textContent = company.location;
-    document.getElementById('modal-desc').textContent = company.description;
+    document.getElementById('modal-description').textContent = company.description;
     document.getElementById('modal-website').href = company.website;
-    
+
     document.getElementById('view-modal').classList.remove('hidden');
     document.getElementById('view-modal').classList.add('flex');
 }
 
 function hideViewModal() {
-    document.getElementById('view-modal').classList.add('hidden');
-    document.getElementById('view-modal').classList.remove('flex');
+    const modal = document.getElementById('view-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
 }
 
 async function handleAddCompany(e) {
@@ -75,14 +71,13 @@ async function handleAddCompany(e) {
         });
 
         if (res.ok) {
-            const addedCompany = await res.json();
-            allCompanies.unshift(addedCompany);
+            const added = await res.json();
+            allCompanies.unshift(added);
             renderCompanies(allCompanies);
             hideAddModal();
-            alert('Company added successfully!');
+            alert('✅ Company added successfully!');
         }
     } catch (err) {
-        console.error(err);
         alert('Failed to add company');
     }
 }
@@ -94,8 +89,9 @@ function showAddModal() {
 }
 
 function hideAddModal() {
-    document.getElementById('add-modal').classList.add('hidden');
-    document.getElementById('add-modal').classList.remove('flex');
+    const modal = document.getElementById('add-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
 }
 
 function performSearch() {
@@ -106,7 +102,7 @@ function performSearch() {
         return;
     }
 
-    const filtered = allCompanies.filter(c =>
+    const filtered = allCompanies.filter(c => 
         c.name.toLowerCase().includes(term) ||
         c.location.toLowerCase().includes(term) ||
         c.description.toLowerCase().includes(term)
@@ -115,6 +111,4 @@ function performSearch() {
     renderCompanies(filtered);
 }
 
-window.onload = () => {
-    fetchCompanies();
-};
+window.onload = fetchCompanies;
