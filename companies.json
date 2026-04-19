@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "OpenAI",
+    "location": "San Francisco, CA",
+    "description": "Leading artificial intelligence research and deployment company known for ChatGPT and GPT models.",
+    "website": "https://openai.com"
+  },
+  {
+    "id": 2,
+    "name": "NVIDIA",
+    "location": "Santa Clara, CA",
+    "description": "World leader in GPUs, AI computing, and accelerated computing platforms.",
+    "website": "https://nvidia.com"
+  },
+  {
+    "id": 3,
+    "name": "Airbnb",
+    "location": "San Francisco, CA",
+    "description": "Global platform for booking unique homes and experiences around the world.",
+    "website": "https://airbnb.com"
+  },
+  {
+    "id": 4,
+    "name": "Stripe",
+    "location": "South San Francisco, CA",
+    "description": "Financial infrastructure and payments platform for the internet.",
+    "website": "https://stripe.com"
+  },
+  {
+    "id": 5,
+    "name": "Slack",
+    "location": "San Francisco, CA",
+    "description": "Leading team communication and collaboration platform.",
+    "website": "https://slack.com"
+  },
+  {
+    "id": 6,
+    "name": "Uber",
+    "location": "San Francisco, CA",
+    "description": "Ride-sharing, delivery, and mobility platform operating globally.",
+    "website": "https://uber.com"
+  },
+  {
+    "id": 7,
+    "name": "Notion",
+    "location": "San Francisco, CA",
+    "description": "All-in-one workspace for notes, tasks, databases, and collaboration.",
+    "website": "https://notion.so"
+  },
+  {
+    "id": 8,
+    "name": "Databricks",
+    "location": "San Francisco, CA",
+    "description": "Unified data analytics platform built on Apache Spark.",
+    "website": "https://databricks.com"
+  },
+  {
+    "id": 9,
+    "name": "Anthropic",
+    "location": "San Francisco, CA",
+    "description": "AI safety and research company building Claude AI models.",
+    "website": "https://anthropic.com"
+  },
+  {
+    "id": 10,
+    "name": "DoorDash",
+    "location": "San Francisco, CA",
+    "description": "Local delivery platform for food, groceries, and retail.",
+    "website": "https://doordash.com"
+  }
+]
