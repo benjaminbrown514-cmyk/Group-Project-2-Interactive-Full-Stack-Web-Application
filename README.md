@@ -99,4 +99,7 @@ Url links:
 
 (https://benjaminbrown514-cmyk.github.io/Group-Project-2-Interactive-Full-Stack-Web-Application/)
 
+#Mockup
+
+<img width="3024" height="4032" alt="IMG_0213" src="https://github.com/user-attachments/assets/05a70ec0-7c49-4023-985e-b066a9be6b01" />
 
