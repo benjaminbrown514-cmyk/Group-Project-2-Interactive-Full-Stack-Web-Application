@@ -16,11 +16,11 @@
             </div>
 
             <input 
-                id="search-input"
-                type="text" 
-                placeholder="Search companies..." 
-                class="w-80 px-5 py-3 bg-slate-100 rounded-3xl focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm"
-                onkeyup="if(event.key === 'Enter') performSearch()">
+    id="search-input"
+    type="text" 
+    placeholder="Search companies..." 
+    class="w-80 px-5 py-3 bg-slate-100 rounded-3xl focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm"
+    oninput="performSearch()">
             <button onclick="showAddModal()" 
                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-3xl font-medium flex items-center gap-x-2">
                 <span class="text-xl leading-none">+</span>
