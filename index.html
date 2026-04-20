@@ -1,18 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-     <link rel = "stylesheet" href = "style.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bay Area Tech Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-     <h1>Companies List:</h1>
-     <script src = "index.js"></script>
-      <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div id="search-form" class="mb-3">
-                    <label for="company-input" class="form-label">Search for a company:</label>
-                    <div class="input-group">
-                        <input type="text" id="company-input" class="form-control" placeholder="Mars corporation">
-                        <button id="search-btn" class="btn btn-primary">Search</button>
-                        <script src = "index.js"></script>
-</body>  
-</html> 
+<body class="bg-slate-50 font-sans">
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-sky-600 rounded-2xl flex items-center justify-center text-white text-3xl">🔨</div>
+                <h1 class="text-3xl font-bold tracking-tighter">Company Searcher</h1>
+            </div>
+
+            <input 
+                id="search-input"
+                type="text" 
+                placeholder="Search companies..." 
+                class="w-80 px-5 py-3 bg-slate-100 rounded-3xl focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm"
+                onkeyup="if(event.key === 'Enter') performSearch()">
+            <button onclick="showAddModal()" 
+                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-3xl font-medium flex items-center gap-x-2">
+                <span class="text-xl leading-none">+</span>
+                <span>Add Company</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-sky-600 to-blue-700 text-white py-20">
+        <div class="max-w-screen-2xl mx-auto px-8 text-center">
+            <h2 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Bay Area Tech Directory</h2>
+            <p class="text-xl max-w-2xl mx-auto">Discover innovative companies shaping the future of technology.</p>
+        </div>
+    </header>
+
+    <section class="max-w-screen-2xl mx-auto px-8 py-12">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-semibold text-slate-900">Companies</h2>
+            <p id="results-count" class="text-slate-500">Loading companies...</p>
+        </div>
+
+        <div id="companies-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        </div>
+
+        <div id="empty-state" class="hidden text-center py-20">
+            <div class="text-6xl mb-4">🔎</div>
+            <h3 class="text-xl font-medium text-slate-600">No companies found</h3>
+            <p class="text-slate-500 mt-2">Try adjusting your search or add a new company.</p>
+        </div>
+    </section>
+     
+    <div id="view-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="bg-white rounded-3xl max-w-lg w-full mx-4 p-8 modal">
+            <button onclick="hideViewModal()" 
+                    class="float-right text-4xl text-slate-300 hover:text-slate-500 leading-none">×</button>
+            
+            <h3 id="modal-name" class="text-3xl font-semibold mb-1"></h3>
+            <p id="modal-location" class="text-emerald-600 font-medium"></p>
+            <p id="modal-description" class="mt-6 text-slate-600 leading-relaxed"></p>
+            <a id="modal-website" href="#" target="_blank"
+               class="mt-8 block w-full text-center bg-slate-900 hover:bg-black text-white py-4 rounded-3xl font-semibold">
+            </a>
+        </div>
+    </div>
+
+    <div id="add-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8 modal">
+            <h3 class="text-2xl font-semibold mb-6">Add New Bay Area Company</h3>
+            <form id="add-form" onsubmit="handleAddCompany(event)">
+                <input id="add-name" type="text" required placeholder="Company Name" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-2xl mb-4 focus:outline-none focus:border-sky-400">
+                <input id="add-location" type="text" required placeholder="Location (e.g. San Francisco, CA)" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-2xl mb-4 focus:outline-none focus:border-sky-400">
+                <textarea id="add-description" required placeholder="Short description..." rows="4"
+                          class="w-full px-5 py-4 border border-slate-200 rounded-3xl mb-4 focus:outline-none focus:border-sky-400"></textarea>
+                <input id="add-website" type="url" required placeholder="https://company.com" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-2xl mb-6 focus:outline-none focus:border-sky-400">
+                <div class="flex gap-4">
+                    <button type="button" onclick="hideAddModal()" 
+                            class="flex-1 py-4 border border-slate-300 rounded-3xl font-medium">Cancel</button>
+                    <button type="submit" 
+                            class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-3xl font-medium">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
