@@ -56,12 +56,27 @@ function hideViewModal() {
 async function handleAddCompany(e) {
     e.preventDefault();
 
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+        <span class="inline-block animate-spin mr-2">⟳</span>
+        Adding...
+    `;
+
     const newCompany = {
-        name: document.getElementById('add-name').value,
-        location: document.getElementById('add-location').value,
-        description: document.getElementById('add-description').value,
-        website: document.getElementById('add-website').value
+        name: document.getElementById('add-name').value.trim(),
+        location: document.getElementById('add-location').value.trim(),
+        description: document.getElementById('add-description').value.trim(),
+        website: document.getElementById('add-website').value.trim()
     };
+
+    if (!newCompany.name || !newCompany.location || !newCompany.description || !newCompany.website) {
+        alert("Please fill out all fields");
+        resetButton();
+        return;
+    }
 
     try {
         const res = await fetch('/api/companies', {
@@ -71,14 +86,27 @@ async function handleAddCompany(e) {
         });
 
         if (res.ok) {
-            const added = await res.json();
-            allCompanies.unshift(added);
+            const addedCompany = await res.json();
+            
+            allCompanies.unshift(addedCompany);
             renderCompanies(allCompanies);
+            
             hideAddModal();
-            alert('✅ Company added successfully!');
+            alert(`✅ ${addedCompany.name} was added successfully!`);
+        } else {
+            const errorData = await res.json();
+            alert(errorData.error || "Failed to add company");
         }
     } catch (err) {
-        alert('Failed to add company');
+        console.error("Add company error:", err);
+        alert("Could not connect to server. Make sure 'npm run dev' is running.");
+    } finally {
+        resetButton();
+    }
+
+    function resetButton() {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
     }
 }
 
